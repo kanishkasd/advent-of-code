@@ -1,15 +1,54 @@
 const fs = require('fs');
+fs.readFile('./file.txt', 'utf8', (err, data) => {
+    if (err) {
+        console.error(err);
+        return;
+    }    
+    const input = data.trim().split('\n');
+    const NUM_WORDS = {
+        one: 1,
+        two: 2,
+        three: 3,
+        four: 4,
+        five: 5,
+        six: 6,
+        seven: 7,
+        eight: 8,
+        nine: 9,
+    };
 
-function calculateSum(filePath){
+    const NUM_WORD_ENTRIES = Object.entries(NUM_WORDS);
 
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if(err){
-            return err;
+    function strToNum(str) {
+        for (let [word, num] of NUM_WORD_ENTRIES) {
+            if (str.startsWith(word)) {
+                return num;
+            }
         }
-        const lines = data.trim().split('\n');
-        console.log(lines);
-    })
-}
+        return '';
+    }
 
+    const numbersInLines = input.map((line) => {
+        const allNumbers = line
+            .split('')
+            .map((char, i) => {
+                const restOfLineFromChar = line.slice(i);
 
-calculateSum('./file.txt');
+                // If we have a digit, return that. Otherwise, look to see if this char could be the start of a number word
+                return /\d/.test(char) ? char : strToNum(restOfLineFromChar);
+            })
+            .filter(Boolean);
+
+        const firstNumber = allNumbers[0];
+        const lastNumber = allNumbers[allNumbers.length - 1];
+        console.log(firstNumber, lastNumber);
+        return parseInt(`${firstNumber}${lastNumber}`, 10);
+    });
+
+    let sum = 0;
+    for (let num of numbersInLines) {
+        sum += num;
+    }
+
+    console.log(sum);
+});
