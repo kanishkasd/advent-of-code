@@ -8,6 +8,7 @@ function countHousesWithPresents(directions) {
     function visitHouse(x, y) {
         const key = x + ',' + y;
         visitedHouses.set(key, (visitedHouses.get(key) || 0) + 1);
+        console.log(visitedHouses)
     }
     visitHouse(x, y);
 
