@@ -1,13 +1,13 @@
 const fs = require('fs');
 
-function housesWithPresents(directions) {
+function countHousesWithPresents(directions) {
     const visitedHouses = new Map();
     let x = 0;
     let y = 0;
 
     function visitHouse(x, y) {
         const key = x + ',' + y;
-        visitHouse.set(key, (visitedHouses.get(key) || 0) + 1);
+        visitedHouses.set(key, (visitedHouses.get(key) || 0) + 1);
     }
     visitHouse(x, y);
 
@@ -32,3 +32,14 @@ function housesWithPresents(directions) {
 
     return visitedHouses.size;
 }
+
+fs.readFile('./input.txt', 'utf8', (err, data) => {
+    if (err) {
+        console.log(err);
+        return;
+    }
+    const directions = data.trim();
+    const housesWithPresents = countHousesWithPresents(directions);
+    console.log(housesWithPresents);
+})
+
