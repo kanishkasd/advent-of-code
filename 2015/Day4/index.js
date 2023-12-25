@@ -1,6 +1,6 @@
 const crypto = require('crypto-js');
 
-let secretKey = 'abcdef'
+let secretKey = 'bgvyzdsv'
 let number = 1;
 
 while(true){
@@ -8,7 +8,7 @@ while(true){
 
     let hash = crypto.MD5(input).toString(crypto.enc.Hex);
 
-    if(hash.startsWith('00000')){
+    if(hash.startsWith('000000')){
         console.log(number);
         break;
     }
