@@ -9,7 +9,7 @@ function isNiceString(string) {
 
     function hasConsecutiveChars() {
         for (let i = 0; i < string.length - 1; i++) {
-                if (string[i] === string[i + 1] || string[i] === string[i + 2]) {
+                if (string[i] === string[i + 1]) {
                     return true;
                 }
             }
